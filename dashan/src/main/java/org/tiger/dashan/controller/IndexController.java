@@ -9,12 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController
 {
     
-    //
-    // public String index()
-    // {
-    // return "index";
-    // }
-    
     @RequestMapping("/compatible")
     public ModelAndView checkbrowser()
     {
