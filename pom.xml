@@ -19,6 +19,5 @@
     <module>lib</module>
     <module>common</module>
     <module>dashan</module>
-    <module>web</module>
   </modules>
 </project>
