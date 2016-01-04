@@ -5,9 +5,9 @@
 <head>
 <title>Home</title>
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css"
-	media="all">
+	media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="keywords"
@@ -25,13 +25,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </script>
 <link href='http://fonts.useso.com/css?family=Lobster' rel='stylesheet'
-	type='text/css'>
+	type='text/css' />
 <link
 	href='http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-	rel='stylesheet' type='text/css'>
+	rel='stylesheet' type='text/css' />
 <link
 	href='http://fonts.useso.com/css?family=Josefin+Sans:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic'
-	rel='stylesheet' type='text/css'>
+	rel='stylesheet' type='text/css' />
 <script src="js/jquery.min.js"></script>
 
 <!---- start-smoth-scrolling---->
@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 <!---End-smoth-scrolling---->
-<link rel="stylesheet" href="css/swipebox.css">
+<link rel="stylesheet" href="css/swipebox.css" />
 <script src="js/jquery.swipebox.min.js"></script>
 <script type="text/javascript">
 	jQuery(function($) {
