@@ -15,7 +15,7 @@ public class IndexController
         return new ModelAndView("compatible");
     }
     
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public ModelAndView view()
     {
         return new ModelAndView("index");
