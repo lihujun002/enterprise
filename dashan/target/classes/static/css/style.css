@@ -51,11 +51,14 @@ body{
   margin: 15em auto 0;
 }
 .logo a {
-  font-size: 9em;
+  font-size: 7em;
   text-transform: capitalize;
   text-decoration: none;
   color:#fff;
   	font-family: 'Lobster', cursive;
+}
+.logo a div {
+	font-size: 0.5em;
 }
 .top-menu {
    float:left;
