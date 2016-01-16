@@ -16,9 +16,27 @@ public class IndexController
     }
     
     @RequestMapping("/")
-    public ModelAndView view()
+    public ModelAndView index()
     {
         return new ModelAndView("index");
+    }
+    
+    @RequestMapping("/products")
+    public ModelAndView products()
+    {
+        return new ModelAndView("products");
+    }
+    
+    @RequestMapping("/knowledge")
+    public ModelAndView knowledge()
+    {
+        return new ModelAndView("knowledge");
+    }
+    
+    @RequestMapping("/about")
+    public ModelAndView about()
+    {
+        return new ModelAndView("about");
     }
     
 }

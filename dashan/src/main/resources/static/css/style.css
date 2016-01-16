@@ -45,10 +45,10 @@ body{
   background: rgba(0, 0, 0, 0.41);
 }
 .logo {
-  border-top: 5px solid#fff;
-  border-bottom: 5px solid#fff;
+  border-top: 3px solid#fff;
+  border-bottom: 3px solid#fff;
   width: 28%;
-  margin: 15em auto 0;
+  margin: 14em auto 0;
 }
 .logo a {
   font-size: 7em;
@@ -58,6 +58,22 @@ body{
   	font-family: 'Lobster', cursive;
 }
 .logo a div {
+	font-size: 0.5em;
+}
+.logoother {
+  border-top: 3px solid#fff;
+  border-bottom: 3px solid#fff;
+  width: 28%;
+  margin: 6em auto 0;
+}
+.logoother a {
+  font-size: 7em;
+  text-transform: capitalize;
+  text-decoration: none;
+  color:#fff;
+  	font-family: 'Lobster', cursive;
+}
+.logoother a div {
 	font-size: 0.5em;
 }
 .top-menu {
