@@ -2,7 +2,6 @@ package org.tiger.dashan.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
@@ -10,33 +9,33 @@ public class IndexController
 {
     
     @RequestMapping("/compatible")
-    public ModelAndView checkbrowser()
+    public String checkbrowser()
     {
-        return new ModelAndView("compatible");
+        return "compatible";
     }
     
     @RequestMapping("/")
-    public ModelAndView index()
+    public String index()
     {
-        return new ModelAndView("index");
+        return "index";
     }
     
     @RequestMapping("/products")
-    public ModelAndView products()
+    public String products()
     {
-        return new ModelAndView("products");
+        return "products";
     }
     
     @RequestMapping("/knowledge")
-    public ModelAndView knowledge()
+    public String knowledge()
     {
-        return new ModelAndView("knowledge");
+        return "knowledge";
     }
     
     @RequestMapping("/about")
-    public ModelAndView about()
+    public String about()
     {
-        return new ModelAndView("about");
+        return "about";
     }
     
 }
