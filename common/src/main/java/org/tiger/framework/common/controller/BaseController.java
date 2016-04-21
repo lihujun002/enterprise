@@ -1,4 +1,4 @@
-package org.tiger.framework.dashan.controller;
+package org.tiger.framework.common.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -6,12 +6,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.tiger.framework.common.exception.AppException;
 import org.tiger.framework.common.exception.Code;
 import org.tiger.framework.common.vo.ResponseVO;
 
-@RestController
+/**
+ * controller 父类 统一异常处理
+ * 
+ * @author lihj17
+ *        
+ */
 public class BaseController
 {
     

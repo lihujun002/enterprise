@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.tiger.framework.common.cache.RedisService;
 import org.tiger.framework.common.cache.cluster.JedisTemplate;
 import org.tiger.framework.common.config.Properties;
+import org.tiger.framework.common.controller.BaseController;
 import org.tiger.framework.common.entity.User;
 import org.tiger.framework.common.exception.Code;
 import org.tiger.framework.common.service.UserService;
