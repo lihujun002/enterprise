@@ -45,5 +45,6 @@
 		<module>common</module>
 		<module>dashan</module>
 		<module>mq</module>
+		<module>websocket</module>
 	</modules>
 </project>

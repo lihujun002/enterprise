@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+
+<title>Demo Chat</title>
+
+<link href="bootstrap.css" rel="stylesheet">
+
+<style>
+body {
+	padding: 20px;
+}
+
+#console {
+	height: 400px;
+	overflow: auto;
+}
+
+.username-msg {
+	color: orange;
+}
+
+.connect-msg {
+	color: green;
+}
+
+.disconnect-msg {
+	color: red;
+}
+
+.send-msg {
+	color: #888
+}
+</style>
+
+
+<script src="js/socket.io/socket.io.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/jquery-1.7.2.min.js"></script>
+
+<script>
+	var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+	var socket;
+	function sendDisconnect() {
+		socket.disconnect();
+	}
+
+	function sendConnect() {
+
+		socket = io.connect('http://127.0.0.1:9099?userName=' + userName, {
+			transports : [ 'flashsocket', 'htmlfile', 'xhr-polling',
+					'jsonp-polling', 'websocket' ]
+		});
+
+		socket.on('connect', function() {
+			output('<span class="connect-msg">我已经连上服务器！ Oye！！</span>');
+		});
+
+		socket.on('message', function(data, ackServerCallback) {
+			output('<span class="username-msg">' + data.userName + ':</span> '
+					+ data.message);
+			if (ackServerCallback) {
+				// send ack data to server
+				ackServerCallback('server message was delivered to client!');
+			}
+		});
+
+		socket.on('disconnect', function() {
+			output('<span class="disconnect-msg">我回家吃饭了！不陪你玩了！</span>');
+		});
+	}
+
+	function sendMessage() {
+		var message = $('#msg').val();
+		$('#msg').val('');
+
+		var jsonObject = {
+			'@class' : 'com.corundumstudio.socketio.demo.ChatObject',
+			userName : userName,
+			message : message
+		};
+
+		socket.emit('message', jsonObject, function(arg1, arg2) {
+			//alert("ack from server! arg1: " + arg1 + ", arg2: " + arg2);
+		});
+	}
+
+	function output(message) {
+		var currentTime = "<span class='time'>"
+				+ moment().format('YYYY-MM-DD HH:mm:ss.SSS') + "</span>";
+		var element = $("<div>" + currentTime + " " + message + "</div>");
+		$('#console').prepend(element);
+	}
+
+	$(document).keydown(function(e) {
+		if (e.keyCode == 13) {
+			$('#send').click();
+		}
+	});
+</script>
+</head>
+
+<body>
+
+	<h1>Netty-socketio Demo Chat</h1>
+
+	<br />
+
+	<div id="console" class="well"></div>
+
+	<form class="well form-inline" onsubmit="return false;">
+		<input id="msg" class="input-xlarge" type="text"
+			placeholder="Type something..." />
+		<button type="button" onClick="sendMessage()" class="btn" id="send">发送消息</button>
+		<button type="button" onClick="sendConnect()" class="btn">连接</button>
+		<button type="button" onClick="sendDisconnect()" class="btn">断开</button>
+	</form>
+
+
+
+</body>
+
+</html>
