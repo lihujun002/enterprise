@@ -15,8 +15,6 @@
   
   
   <modules>
-    <module>config</module>
-    <module>lib</module>
     <module>common</module>
     <module>dashan</module>
   </modules>
