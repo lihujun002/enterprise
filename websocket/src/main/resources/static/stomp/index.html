@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8" />
+
+<title>Demo Chat</title>
+
+
+<style>
+body {
+	padding: 20px;
+}
+
+#console {
+	height: 400px;
+	overflow: auto;
+}
+
+.username-msg {
+	color: orange;
+}
+
+.connect-msg {
+	color: green;
+}
+
+.disconnect-msg {
+	color: red;
+}
+
+.send-msg {
+	color: #888
+}
+</style>
+
+
+<script src="../js/socket.io/socket.io.js"></script>
+<script src="../js/moment.min.js"></script>
+<script src="../js/jquery-1.7.2.min.js"></script>
+<script src="../js/stomp/stomp.js"></script>
+<script src="../js/socketjs/sockjs_1.0.0.js"></script>
+
+<script>
+	var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+
+	var url = 'http://localhost:8088/stompwechat';
+	var socket = new SockJS(url, undefined, {
+		protocols_whitelist : [ 'flashsocket', 'htmlfile', 'xhr-polling',
+		    					'jsonp-polling', 'websocket' ]
+	});
+	var stompClient = Stomp.over(
+	socket);
+	stompClient.connect({}, function(frame) {
+		stompClient.subscribe('/topic/hello/123', function(message) {
+			output(message.body);
+			//var json = JSON.parse(message.body);
+			//output(json["payload"]);
+		});
+
+		
+		
+
+	});
+	function sendMessage() {
+		var header = {'content-type':'text/html'};
+		var msg = $("#msg").val();
+		stompClient.send('/hello',header,msg);
+	}
+
+	function output(message) {
+		var currentTime = "<span class='time'>"
+				+ moment().format('YYYY-MM-DD HH:mm:ss.SSS') + "</span>";
+		var element = $("<div>" + currentTime + " " + message + "</div>");
+		$('#console').prepend(element);
+	}
+
+	$(document).keydown(function(e) {
+		if (e.keyCode == 13) {
+			$('#send').click();
+		}
+	});
+</script>
+</head>
+
+<body>
+
+	<h1>SocketJS Stomp Demo Chat</h1>
+
+	<br />
+
+	<div id="console" class="well"></div>
+
+	<form class="well form-inline" onsubmit="return false;">
+		<input id="msg" class="input-xlarge" type="text"
+			placeholder="Type something..." />
+		<button type="button" onClick="sendMessage()" class="btn" id="send">发送消息</button>
+	</form>
+	
+
+
+</body>
+
+</html>
