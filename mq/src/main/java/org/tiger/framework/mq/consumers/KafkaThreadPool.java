@@ -1,23 +1,20 @@
 package org.tiger.framework.mq.consumers;
 
-import static kafka.consumer.Consumer.createJavaConsumerConnector;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.tiger.framework.common.cache.RedisService;
 import org.tiger.framework.common.config.KafkaProperties;
-
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.KafkaStream;
-import kafka.javaapi.consumer.ConsumerConnector;
 
 /**
  * 消费者线程处理池
@@ -29,6 +26,8 @@ import kafka.javaapi.consumer.ConsumerConnector;
 public class KafkaThreadPool
 {
     
+    private static Logger logger = LoggerFactory.getLogger(KafkaThreadPool.class);
+    
     @Resource
     private KafkaProperties kafkaProperties;
     
@@ -38,7 +37,7 @@ public class KafkaThreadPool
     @Resource
     private RedisService<Object> redisService;
     
-    private ConsumerConnector consumer;
+    private KafkaConsumer<String, byte[]> consumer;
     
     private ExecutorService threadPool;
     
@@ -46,25 +45,32 @@ public class KafkaThreadPool
     public void startConsuming()
     {
         threadPool = Executors.newFixedThreadPool(kafkaProperties.getConsumerThreadNum());
-        ConsumerConfig consumerConfig = consumerConfigFactory.getConsumerConfig(kafkaProperties);
-        consumer = createJavaConsumerConnector(consumerConfig);
-        consume();
+        consumer = new KafkaConsumer<String, byte[]>(consumerConfigFactory.getConsumerConfig(kafkaProperties));
+        consumer.subscribe(Arrays.asList(kafkaProperties.getTopics()));
+        new Thread(new ConsumeThread()).start();
     }
     
     /**
-     * 消费数据
+     * 消费者
+     * 
+     * @author lihj17
+     *         
      */
-    public void consume()
+    class ConsumeThread implements Runnable
     {
-        String topic = kafkaProperties.getTopic();
-        Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
-        topicCountMap.put(topic, kafkaProperties.getConsumerThreadNum());
-        Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
-        List<KafkaStream<byte[], byte[]>> streams = consumerMap.get(topic);
-        
-        for (final KafkaStream<byte[], byte[]> stream : streams)
+        @Override
+        public void run()
         {
-            threadPool.submit(new KafkaConsumer(stream));
+            logger.info("ConsumeThread run ......");
+            while (true)
+            {
+                ConsumerRecords<String, byte[]> poll = consumer.poll(100);
+                for (ConsumerRecord<String, byte[]> consumerRecord : poll)
+                {
+                    threadPool.submit(new KafkaConsumerThread(consumerRecord));
+                }
+            }
         }
+        
     }
 }

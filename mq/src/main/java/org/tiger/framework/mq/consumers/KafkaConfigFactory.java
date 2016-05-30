@@ -5,8 +5,6 @@ import java.util.Properties;
 import org.springframework.stereotype.Component;
 import org.tiger.framework.common.config.KafkaProperties;
 
-import kafka.consumer.ConsumerConfig;
-
 /**
  * 消费者配置工厂
  * 
@@ -21,14 +19,15 @@ public class KafkaConfigFactory {
 	 * @param properties
 	 * @return
 	 */
-	public ConsumerConfig getConsumerConfig(KafkaProperties properties) {
-		Properties props = new Properties();
-		props.put("zookeeper.connect", properties.getZookeeperConnect());
-		props.put("group.id", properties.getGroupId());
-		props.put("serializer.class", properties.getSerializerClass());
-		props.put("zookeeper.session.timeout.ms", properties.getZookeeperSessionTimeoutMs());
-		props.put("zookeeper.sync.time.ms", properties.getZookeeperSyncTimeMs());
-		props.put("auto.commit.interval.ms", properties.getAutoCommitIntervalMs());
-		return new ConsumerConfig(props);
+	public Properties getConsumerConfig(KafkaProperties properties) {
+	    Properties props = new Properties();
+        props.put("bootstrap.servers", properties.getBootstrapServers());
+        props.put("group.id", properties.getGroupId());
+        props.put("enable.auto.commit", properties.getEnableAutoCommit());
+        props.put("auto.commit.interval.ms", properties.getAutoCommitIntervalMs());
+        props.put("session.timeout.ms", properties.getSessionTimeoutMs());
+        props.put("key.deserializer", properties.getKeyDeserializer());
+        props.put("value.deserializer", properties.getValueDeserializer());
+        return props;
 	}
 }

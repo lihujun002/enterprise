@@ -14,32 +14,36 @@ import org.springframework.stereotype.Component;
 public class KafkaProperties
 {
     /**
-     * zookeeper连接地址
+     * kafka连接地址
      */
-    private String zookeeperConnect;
+    private String bootstrapServers;
     
     private String groupId;
     
     private String serializerClass;
     
-    private String zookeeperSessionTimeoutMs;
+    private String enableAutoCommit;
     
-    private String zookeeperSyncTimeMs;
+    private String sessionTimeoutMs;
     
     private String autoCommitIntervalMs;
     
-    private String topic;
+    private String keyDeserializer;
+    
+    private String valueDeserializer;
+    
+    private String topics;
     
     private Integer consumerThreadNum;
     
-    public String getZookeeperConnect()
+    public String getBootstrapServers()
     {
-        return zookeeperConnect;
+        return bootstrapServers;
     }
     
-    public void setZookeeperConnect(String zookeeperConnect)
+    public void setBootstrapServers(String bootstrapServers)
     {
-        this.zookeeperConnect = zookeeperConnect;
+        this.bootstrapServers = bootstrapServers;
     }
     
     public String getGroupId()
@@ -62,24 +66,24 @@ public class KafkaProperties
         this.serializerClass = serializerClass;
     }
     
-    public String getZookeeperSessionTimeoutMs()
+    public String getEnableAutoCommit()
     {
-        return zookeeperSessionTimeoutMs;
+        return enableAutoCommit;
     }
     
-    public void setZookeeperSessionTimeoutMs(String zookeeperSessionTimeoutMs)
+    public void setEnableAutoCommit(String enableAutoCommit)
     {
-        this.zookeeperSessionTimeoutMs = zookeeperSessionTimeoutMs;
+        this.enableAutoCommit = enableAutoCommit;
     }
     
-    public String getZookeeperSyncTimeMs()
+    public String getSessionTimeoutMs()
     {
-        return zookeeperSyncTimeMs;
+        return sessionTimeoutMs;
     }
     
-    public void setZookeeperSyncTimeMs(String zookeeperSyncTimeMs)
+    public void setSessionTimeoutMs(String sessionTimeoutMs)
     {
-        this.zookeeperSyncTimeMs = zookeeperSyncTimeMs;
+        this.sessionTimeoutMs = sessionTimeoutMs;
     }
     
     public String getAutoCommitIntervalMs()
@@ -92,14 +96,34 @@ public class KafkaProperties
         this.autoCommitIntervalMs = autoCommitIntervalMs;
     }
     
-    public String getTopic()
+    public String getKeyDeserializer()
     {
-        return topic;
+        return keyDeserializer;
     }
     
-    public void setTopic(String topic)
+    public void setKeyDeserializer(String keyDeserializer)
     {
-        this.topic = topic;
+        this.keyDeserializer = keyDeserializer;
+    }
+    
+    public String getValueDeserializer()
+    {
+        return valueDeserializer;
+    }
+    
+    public void setValueDeserializer(String valueDeserializer)
+    {
+        this.valueDeserializer = valueDeserializer;
+    }
+    
+    public String getTopics()
+    {
+        return topics;
+    }
+    
+    public void setTopics(String topics)
+    {
+        this.topics = topics;
     }
     
     public Integer getConsumerThreadNum()
