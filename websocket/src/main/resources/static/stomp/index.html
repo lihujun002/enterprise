@@ -53,7 +53,13 @@ body {
 	socket);
 	stompClient.connect({}, function(frame) {
 		stompClient.subscribe('/topic/hello/123', function(message) {
-			output(message.body);
+			output("123:"+message.body);
+			//var json = JSON.parse(message.body);
+			//output(json["payload"]);
+		});
+		
+		stompClient.subscribe('/user/topic/lihujun', function(message) {
+			output("lihujun:"+message.body);
 			//var json = JSON.parse(message.body);
 			//output(json["payload"]);
 		});

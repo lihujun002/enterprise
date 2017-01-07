@@ -36,12 +36,18 @@ public class StompSocketController
         return obj.toString();
     }
     
+    /**
+     * @SendToUser “/topic/lihujun”会被UserDestinationMessageHandler转化成”/user/role1/topic/lihujun”,role1是用户的登录帐号
+     * @param message
+     * @return
+     * @throws Exception
+     */
     @MessageMapping("/message")
-    @SendToUser("/message")
-    public Object userMessage(String userMessage)
+    @SendToUser("/topic/lihujun")
+    public Object userMessage(GenericMessage message)
         throws Exception
     {
-        logger.info("userMessage 收到客户端消息:" + userMessage);
+        logger.info("userMessage 收到客户端消息:" + message.toString());
         return "我已经收到你的消息";
     }
     

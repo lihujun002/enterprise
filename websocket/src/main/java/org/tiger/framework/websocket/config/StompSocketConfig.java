@@ -36,6 +36,8 @@ public class StompSocketConfig extends AbstractWebSocketMessageBrokerConfigurer
         // 这里设置的simple broker是指可以订阅的地址，也就是服务器可以发送的地址
         // 在topic这个域上可以向客户端发消息,也就是服务器可以发送的地址
         registry.enableSimpleBroker("/topic");
+        //这里设置的app的目的地 设置了之后客户端发过来的请求前缀必须是 /app
+//        registry.setApplicationDestinationPrefixes("/app");
     }
     
 }
