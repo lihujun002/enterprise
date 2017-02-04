@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>图片服务器</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    
+    <script type="text/javascript">
+  
+    function testImg() {
+    	  var url = $("#url").val();
+    	window.open(url + "/down/testImg");
+    }
+    
+    function watermark() {
+    	var url = $("#url").val();
+    	var text = $("#watermark").val();
+    	var position = $("#position").val();
+    	var color = $("#color").val();
+    	var fontSize = $("#fontSize").val();
+    	var alpha = $("#alpha").val();
+    	var watermarkX = $("#watermarkX").val();
+    	var watermarkY = $("#watermarkY").val();
+    	if(!text) {
+    		alert("请填写水印参数");
+    		return;
+    	}
+    	window.open(url + "/im4java/watermarkImg?textmark="+encodeURIComponent(text)+"&alpha="+alpha+"&color="+color+"&fontSize="+fontSize+"&position="+position+"&x="+watermarkX+"&y="+watermarkY);
+    }
+    
+    function cutImage() {
+    	var url = $("#url").val();
+    	var cutX = $("#cutX").val();
+    	var cutY = $("#cutY").val();
+    	var cutWidth = $("#cutWidth").val();
+    	var cutHeight = $("#cutHeight").val();
+    	if(!cutX) {
+    		alert("请填写截取的X坐标参数");
+    		return;
+    	}
+    	if(!cutY) {
+    		alert("请填写截取的Y坐标参数");
+    		return;
+    	}
+    	if(!cutWidth) {
+    		alert("请填写截取宽度坐标参数");
+    		return;
+    	}
+    	if(!cutHeight) {
+    		alert("请填写截取高度参数");
+    		return;
+    	}
+    	window.open(url + "/im4java/cutImage?x="+cutX+"&y="+cutY+"&width="+cutWidth+"&height="+cutHeight);
+    }
+    
+    function scaleResizeImage() {
+    	  var url = $("#url").val();
+    	var scaleResizeWidth = $("#scaleResizeWidth").val();
+    	var scaleResizeHeight = $("#scaleResizeHeight").val();
+    	if(!scaleResizeWidth) {
+    		alert("请填写缩放高度参数");
+    		return;
+    	}
+    	if(!scaleResizeHeight) {
+    		alert("请填写缩放宽度参数");
+    		return;
+    	}
+    	window.open(url + "/im4java/scaleResizeImage?width="+scaleResizeWidth+"&height="+scaleResizeHeight);
+    }
+    
+    function reduceQuality() {
+    	  var url = $("#url").val();
+    	var quality = $("#quality").val();
+    	if(!quality) {
+    		alert("请填写品质参数");
+    		return;
+    	}
+    	window.open(url + "/im4java/reduceQuality?quality="+quality);
+    }
+    
+    function removeProfile() {
+    	  var url = $("#url").val();
+    	window.open(url + "/im4java/removeProfile");
+    }
+    
+    
+    function thumbnailImage() { 
+    	var url = $("#url").val();
+    	var type = $("#type").val();
+    	if(isNaN(type)) {
+    		alert("类型请填写数字");
+    		return;
+    	}
+    	var background = $("#thumbnailBackground").val();
+    	var quality = $("#thumbnailQuality").val();
+    	var thumbnailWidth = $("#thumbnailWidth").val();
+    	var thumbnailHeight = $("#thumbnailHeight").val();
+    	window.open(url + "/im4java/thumbnailImage?type="+type+"&background="+background+"&quality="+quality+"&width="+thumbnailWidth+"&height="+thumbnailHeight);
+    }
+    </script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">图片服务器</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+	            <li><a href="fileupload.html">上传图片</a></li>
+	 			<li class="active"><a href="operate.html">图片处理</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">图片处理</h1>
+
+            <ol class="breadcrumb">
+                <li>图片服务器</li>
+                <li><a href="operate.html">图片处理</a></li>
+            </ol>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>操作</th>
+                        <th>参数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a href = "javascript:void(0)" onclick="testImg()" >查看原始图片</a></td>
+                        <td>无参数</td>
+                    </tr>
+                    <tr>
+                        <td><a href = "javascript:void(0)" onclick="watermark()" >加水印</a></td>
+                        <td>
+                        	水印内容：<input style="width:300px" type="text" id="watermark" name="watermark" />
+                        	颜色：<input style="width:90px" type="text" id="color" name="color" value="red"/>
+                        	字体大小：<input style="width:50px" type="text" id="fontSize" name="fontSize" value="18"/>
+                        	透明度：<input style="width:50px" type="text" id="alpha" name="alpha" value="50"/>
+                        	位置[1-9]：<input style="width:50px" type="text" id="position" name="position" value="9"/>
+                        	x偏移：<input style="width:50px"  type="text" id="watermarkX" name="watermarkX" value="0" />
+                        	y偏移：<input style="width:50px"  type="text" id="watermarkY" name="watermarkY" value="0"/>
+                       	</td>
+                    </tr>
+                     <tr>
+                        <td><a href = "javascript:void(0)" onclick="cutImage()" >裁剪</a></td>
+                        <td>
+                        	x坐标：<input type="text" id="cutX" name="cutX" />
+                        	y坐标：<input type="text" id="cutY" name="cutY" />
+                        	截取宽度：<input type="text" id="cutWidth" name="cutWidth" />
+                        	截取高度：<input type="text" id="cutHeight" name="cutHeight" />
+                        </td>
+                    </tr>
+                     <tr>
+                       <td><a href = "javascript:void(0)" onclick="scaleResizeImage()" >缩放</a></td>
+                        <td>
+                        	缩放宽度：<input type="text" id="scaleResizeWidth" name="scaleResizeWidth" />
+                        	缩放高度：<input type="text" id="scaleResizeHeight" name="scaleResizeHeight" />
+                        </td>
+                    </tr>
+                     <tr>
+                        <td><a href = "javascript:void(0)" onclick="reduceQuality()" >降低品质</a></td>
+                        <td>
+                        	品质值：<input type="text" id="quality" name="quality" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href = "javascript:void(0)" onclick="removeProfile()" >去除多余Exif信息</a></td>
+                        <td>
+                        	无参数
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href = "javascript:void(0)" onclick="thumbnailImage()" >生成缩略图</a></td>
+                        <td>
+                        	缩略图宽度：<input type="text" id="thumbnailWidth" name="thumbnailWidth" /><br/><br/>
+                        	缩略图高度：<input type="text" id="thumbnailHeight" name="thumbnailHeight" /><br/><br/>
+                        	生成模式：<input style="width:50px" type="text" id="type" name="type" value="1" /><br/>
+                        	 <p style="color:red">模式一: 保证图片大小和比例 但对图片进行了裁剪或拉伸<br/>
+                        	 模式二: 保证图片大小和比例 同时没有对图片进行任何裁剪，多余的部分按指定颜色进行填充。<br/>
+                        	 模式三 :平衡类型 保证图片大小和比例 同时在填充和裁剪之间做了一个平衡
+                        	 </p>
+                        	品质值：<input style="width:90px" type="text" id="thumbnailQuality" name="thumbnailQuality" value="50"/><br/><br/>
+                        	填充背景颜色：<input style="width:50px" type="text" id="thumbnailBackground" name="thumbnailBackground" value="gray"/>
+                       	</td>
+                    </tr>
+                    </tbody>
+                </table>
+				URL:<input style="width:260px" type="text" id="url" name="url" value="http://10.133.145.40:8888" />
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="../../assets/js/vendor/holder.min.js"></script>
+
+</body>
+</html>

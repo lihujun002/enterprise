@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>图片服务器</title>
+    <!-- Bootstrap core CSS -->
+    <!-- Custom styles for this template -->
+     <link href="css/bootstrap.min3.3.4.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />	
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">图片服务器</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+	            <li class="active"><a href="fileupload.html">上传图片</a></li>
+	 			<li><a href="operate.html">图片处理</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+         <h1 class="page-header">上传图片</h1>
+            <ol class="breadcrumb">
+                <li>图片服务器</li>
+                <li><a href="fileupload.html">上传图片</a></li>
+            </ol>
+            <div class="table-responsive">
+               <div class="htmleaf-container">
+					<div class="container kv-main">
+			            <form enctype="multipart/form-data" method="post">
+			                <hr>
+			                <div class="form-group">
+			                    <input id="file-1" type="file" name="testImageFile" multiple class="file" data-overwrite-initial="true" data-min-file-count="1">
+			                </div>
+			                <hr>
+			            </form>
+			        </div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/fileinput.js" type="text/javascript"></script>
+<script src="js/fileinput_locale_zh.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+$("#file-1").fileinput({
+    uploadUrl: 'upload/testImage', // you must set a valid URL here else you will get an error
+    allowedFileExtensions : ['jpg', 'png','gif', 'txt'],
+    overwriteInitial: false,
+    maxFileSize: 1000,
+    maxFilesNum: 10,
+    //allowedFileTypes: ['image', 'video', 'flash'],
+    slugCallback: function(filename) {
+        return filename.replace('(', '_').replace(']', '_');
+    }
+});
+</script>
+
+<input type="text">
+</body>
+</html>
