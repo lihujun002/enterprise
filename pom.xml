@@ -51,5 +51,6 @@
 		<module>dashan</module>
 		<module>mq</module>
 		<module>websocket</module>
+		<module>im4java</module>
 	</modules>
 </project>
